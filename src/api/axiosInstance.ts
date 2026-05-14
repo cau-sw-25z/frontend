@@ -1,6 +1,7 @@
 import axios from 'axios'
 import type { AxiosError, AxiosResponse } from 'axios'
 import type { ApiResponse } from '@/types/api'
+import { tokenStorage } from '@/utils/tokenStorage'
 
 // ========================================
 // Axios 인스턴스 생성
@@ -24,8 +25,8 @@ const axiosInstance = axios.create({
 // 모든 API 요청 전에 실행됨
 // ========================================
 axiosInstance.interceptors.request.use((config) => {
-  // localStorage에서 JWT 토큰 가져오기
-  const token = localStorage.getItem('accessToken')
+  // tokenStorage에서 JWT 토큰 가져오기
+  const token = tokenStorage.getAccessToken()
 
   // 토큰이 있으면 Authorization 헤더에 자동 추가
   if (token) {
@@ -65,10 +66,11 @@ axiosInstance.interceptors.response.use(
 
       // 401: 인증 만료 처리
       if (status === 401) {
+        tokenStorage.removeAccessToken()
         console.error('인증이 필요합니다.')
 
         // TODO:
-        // refresh token 재발급 로직 또는 로그아웃 처리
+        // refresh token 재발급 로직은 BE 명세 확정 후 구현
       }
 
       // 서버 에러 메시지 추출
@@ -80,9 +82,7 @@ axiosInstance.interceptors.response.use(
 
     // 네트워크 오류
     if (error.request) {
-      return Promise.reject(
-        new Error('서버에 연결할 수 없습니다.')
-      )
+      return Promise.reject(new Error('서버에 연결할 수 없습니다.'))
     }
 
     // 그 외 오류
