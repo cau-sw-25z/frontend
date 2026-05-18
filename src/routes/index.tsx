@@ -8,8 +8,8 @@ import SignupPage from "@/pages/SignupPage";
 import SurveyPage from "../pages/SurveyPage";
 import SurveyResultPage from "../pages/SurveyResultPage";
 import StocksPage from "../pages/StocksPage";
+import PortfolioNewPage from "@/pages/PortfolioNewPage";
 import MainLayout from "@/layouts/MainLayout";
-import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,17 +32,16 @@ const router = createBrowserRouter([
         element: <SurveyResultPage />,
       },
       {
+        path: "/portfolio/new",
+        element: <PortfolioNewPage />,
+      },
+      {
         path: "/stocks",
         element: <StocksPage />,
       },
       {
-        element: <PrivateRoute />,
-        children: [
-          {
-            path: "/portfolio",
-            element: <PortfolioPage />,
-          },
-        ],
+        path: "/portfolio",
+        element: <PortfolioPage />,
       },
     ],
   },
