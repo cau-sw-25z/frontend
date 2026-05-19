@@ -2,7 +2,6 @@ import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 import type { ApiResponse } from "@/types/api";
 import { tokenStorage } from "@/utils/tokenStorage";
-import.meta.env = Vite;
 // ========================================
 // Axios 인스턴스 생성
 // 모든 API 요청에 공통으로 적용될 설정
