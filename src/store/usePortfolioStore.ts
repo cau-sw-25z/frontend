@@ -17,6 +17,7 @@ interface PortfolioState {
   removeSelectedStockId: (stockId: string) => void;
   clearSelectedStockIds: () => void;
   addStock: (stock: Stock) => void;
+  removeStock: (ticker: string) => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
@@ -51,4 +52,12 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
         selectedStockIds: [...state.selectedStockIds, stock.ticker],
       };
     }),
+
+  removeStock: (ticker) =>
+    set((state) => ({
+      portfolioStocks: state.portfolioStocks.filter(
+        (stock) => stock.ticker !== ticker,
+      ),
+      selectedStockIds: state.selectedStockIds.filter((id) => id !== ticker),
+    })),
 }));
