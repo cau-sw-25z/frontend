@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createChart, LineSeries } from "lightweight-charts";
-import { mockStocks } from "../mocks/stocks";
-import { usePortfolioStore } from "../store/usePortfolioStore";
+import { mockStocks } from "@/mocks/stocks";
+import { usePortfolioStore } from "@/domains/portfolio/store/usePortfolioStore";
 
 export default function StockDetailPage() {
   const navigate = useNavigate();

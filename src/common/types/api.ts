@@ -3,14 +3,14 @@
 // 참고: BE 레포의 docs/api-convention.md
 export interface ApiResponse<T> {
   // 요청 성공 여부
-  success: boolean
+  success: boolean;
 
   // 실제 응답 데이터 (실패 시 null)
-  data: T | null
+  data: T | null;
 
   // 응답 메시지 (사용자에게 보여줄 수 있음)
-  message: string
+  message: string;
 
   // 응답 코드 (예: "SUCCESS", "COMMON_400", "COMMON_401" 등)
-  code: string
+  code: string;
 }

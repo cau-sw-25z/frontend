@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage from "@/pages/HomePage";
-import StockDetailPage from "@/pages/StockDetailPage";
-import PortfolioPage from "@/pages/PortfolioPage";
-import LoginPage from "@/pages/LoginPage";
-import SignupPage from "@/pages/SignupPage";
-import SurveyPage from "../pages/SurveyPage";
-import SurveyResultPage from "../pages/SurveyResultPage";
-import StocksPage from "../pages/StocksPage";
-import PortfolioNewPage from "@/pages/PortfolioNewPage";
+import LoginPage from "@/domains/auth/pages/LoginPage";
+import SignupPage from "@/domains/auth/pages/SignupPage";
+import HomePage from "@/domains/dashboard/pages/HomePage";
+import PortfolioNewPage from "@/domains/portfolio/pages/PortfolioNewPage";
+import PortfolioPage from "@/domains/portfolio/pages/PortfolioPage";
+import StockDetailPage from "@/domains/stock/pages/StockDetailPage";
+import StocksPage from "@/domains/stock/pages/StocksPage";
+import SurveyPage from "@/domains/survey/pages/SurveyPage";
+import SurveyResultPage from "@/domains/survey/pages/SurveyResultPage";
 import MainLayout from "@/layouts/MainLayout";
 
 const router = createBrowserRouter([
