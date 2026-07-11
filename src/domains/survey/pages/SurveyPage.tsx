@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { surveyQuestions } from "../mocks/survey";
+import { surveyQuestions } from "@/mocks/survey";
 
 export default function SurveyPage() {
   const navigate = useNavigate();

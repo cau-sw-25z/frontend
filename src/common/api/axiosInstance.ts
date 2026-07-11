@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
-import type { ApiResponse } from "@/types/api";
-import { tokenStorage } from "@/utils/tokenStorage";
+import type { ApiResponse } from "@/common/types/api";
+import { tokenStorage } from "@/common/utils/tokenStorage";
 // ========================================
 // Axios 인스턴스 생성
 // 모든 API 요청에 공통으로 적용될 설정
