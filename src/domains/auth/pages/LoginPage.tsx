@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { login } from "@/common/api";
 import { tokenStorage } from "@/common/utils/tokenStorage";
 
 export default function LoginPage() {
@@ -12,23 +14,36 @@ export default function LoginPage() {
 
   const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setError("");
 
+    // 입력값 검사
     if (!email || !password) {
       setError("이메일과 비밀번호를 입력해주세요.");
       return;
     }
 
-    if (email !== "test@test.com" || password !== "1234") {
-      setError("이메일 또는 비밀번호가 올바르지 않습니다.");
-      return;
-    }
+    try {
+      // 로그인 API 호출
+      const result = await login({
+        email,
+        password,
+      });
 
-    tokenStorage.setAccessToken("test-token");
-    navigate(from, { replace: true });
+      // JWT 저장
+      tokenStorage.setAccessToken(result.accessToken);
+
+      // 이전 페이지 또는 메인으로 이동
+      navigate(from, { replace: true });
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("로그인 중 오류가 발생했습니다.");
+      }
+    }
   };
 
   const handleSignupClick = () => {
@@ -48,7 +63,13 @@ export default function LoginPage() {
       <h1 style={{ marginBottom: "24px", textAlign: "center" }}>로그인</h1>
 
       {error && (
-        <p style={{ color: "red", marginBottom: "16px", textAlign: "center" }}>
+        <p
+          style={{
+            color: "red",
+            marginBottom: "16px",
+            textAlign: "center",
+          }}
+        >
           {error}
         </p>
       )}
@@ -57,40 +78,60 @@ export default function LoginPage() {
         <div style={{ marginBottom: "16px" }}>
           <label
             htmlFor="email"
-            style={{ display: "block", marginBottom: "8px" }}
+            style={{
+              display: "block",
+              marginBottom: "8px",
+            }}
           >
             이메일
           </label>
+
           <input
             id="email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="이메일을 입력하세요"
-            style={{ width: "100%", padding: "12px", boxSizing: "border-box" }}
+            style={{
+              width: "100%",
+              padding: "12px",
+              boxSizing: "border-box",
+            }}
           />
         </div>
 
         <div style={{ marginBottom: "24px" }}>
           <label
             htmlFor="password"
-            style={{ display: "block", marginBottom: "8px" }}
+            style={{
+              display: "block",
+              marginBottom: "8px",
+            }}
           >
             비밀번호
           </label>
+
           <input
             id="password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="비밀번호를 입력하세요"
-            style={{ width: "100%", padding: "12px", boxSizing: "border-box" }}
+            style={{
+              width: "100%",
+              padding: "12px",
+              boxSizing: "border-box",
+            }}
           />
         </div>
 
         <button
           type="submit"
-          style={{ width: "100%", padding: "12px", cursor: "pointer" }}
+          style={{
+            width: "100%",
+            padding: "12px",
+            cursor: "pointer",
+          }}
         >
           로그인
         </button>
