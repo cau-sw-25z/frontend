@@ -1,6 +1,5 @@
 // src/common/types/signal.ts
 
-// 시그널 하나의 형태 (백엔드 응답 필드 그대로)
 export interface Signal {
   id: number;
   stock_id: number;
@@ -13,14 +12,17 @@ export interface Signal {
   created_at: string;
 }
 
-// /api/signals 응답 전체 형태
+// 인터셉터가 껍데기를 벗긴 후 실제로 받게 되는 알맹이
+export interface SignalListData {
+  signal_date: string;
+  count: number;
+  signals: Signal[];
+}
+
+// (참고용) 서버 원본 응답 전체 구조
 export interface SignalListResponse {
   success: boolean;
-  data: {
-    signal_date: string;
-    count: number;
-    signals: Signal[];
-  };
+  data: SignalListData;
   message: string;
   code: string;
 }

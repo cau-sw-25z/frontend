@@ -11,6 +11,7 @@ import SurveyPage from "@/domains/survey/pages/SurveyPage";
 import SurveyResultPage from "@/domains/survey/pages/SurveyResultPage";
 import MainLayout from "@/layouts/MainLayout";
 import PrivateRoute from "./PrivateRoute";
+import SignalPage from "@/domains/stock/pages/SignalPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
             path: "/portfolio/new",
             element: <PortfolioNewPage />,
           },
+
+          {
+            path: "/signals",
+            element: <SignalPage />,
+          },
+
           {
             path: "/survey",
             element: <SurveyPage />,
